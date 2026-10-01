@@ -1,37 +1,11 @@
-```html
-<video id="video" autoplay playsinline
-       style="width:100%;"></video>
-<button onclick="startCamera()">Open Camera</button>
-<button onclick="takePhoto()">Take Photo</button>
-
-<canvas id="canvas" hidden></canvas>
-
-<script>
-const video = document.getElementById("video");
-const canvas = document.getElementById("canvas");
-
-async function startCamera() {
-  try {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "environment" },
-      audio: false
-    });
-    video.srcObject = stream;
-  } catch (error) {
-    alert("Please allow camera access.");
-  }
-}
-
-function takePhoto() {
-  if (!video.videoWidth) return;
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  canvas.getContext("2d").drawImage(video, 0, 0);
-  const link = document.createElement("a");
-  link.href = canvas.toDataURL("image/png");
-  link.download = "photo.png";
-  link.click();
-}
-</script>
-```
+<input
+  type="file"
+  accept="image/*"
+  capture="environment"
+  id="camera"
+  hidden
+>
+<button onclick="document.getElementById('camera').click()">
+  Open Camera
+</button>
 
